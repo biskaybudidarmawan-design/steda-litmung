@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LitNum Master SD - SD Negeri 1 tegallega 2</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        indigo: {
+                            950: '#0f172a',
+                            900: '#1e1b4b',
+                            800: '#312e81',
+                            700: '#3730a3',
+                            600: '#4338ca',
+                            500: '#4f46e5',
+                            100: '#e0e7ff',
+                            50: '#f5f3ff',
+                        },
+                        amber: {
+                            600: '#d97706',
+                            500: '#f59e0b',
+                            400: '#fbbf24',
+                            300: '#fcd34d',
+                            100: '#fef3c7',
+                            50: '#fffbeb',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .cert-font {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Print Style for A4 Landscape Certificate */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #certificateModal, #certificateModal * {
+                visibility: visible;
+            }
+            #certificateModal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100vw;
+                height: 100vh;
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: block !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-area {
+                box-shadow: none !important;
+                border: 8px double #312e81 !important;
+                width: 100% !important;
+                height: 98vh !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-400 selection:text-indigo-950">
+
+    <!-- TOP ANNOUNCEMENT / HEADER -->
+    <header class="bg-gradient-to-r from-indigo-950 via-indigo-900 to-indigo-800 text-white shadow-xl border-b-4 border-amber-500 sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+                
+                <!-- School & App Identity -->
+                <div class="flex items-center gap-3 text-center md:text-left">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-indigo-950 shadow-md text-2xl font-black shrink-0">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-center md:justify-start gap-2 flex-wrap">
+                            <span class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                                Platform LitNum SD
+                            </span>
+                            <span class="bg-indigo-700/60 text-indigo-100 text-xs px-2.5 py-0.5 rounded-full border border-indigo-500/30">
+                                Instant Play
+                            </span>
+                        </div>
+                        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-0.5">
+                            Aplikasi Asesmen & Pembelajaran LitNum
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Teacher & School Badge -->
+                <div class="flex items-center gap-3 bg-indigo-900/80 border border-indigo-700/50 rounded-xl px-4 py-2 text-sm shadow-inner">
+                    <div class="text-right">
+                        <div class="text-xs text-indigo-200 font-medium">
+                            <i class="fa-solid fa-school text-amber-400 mr-1"></i>
+                            <span id="headerSchoolName">SD Negeri 1 tegallega 2</span>
+                        </div>
+                        <div class="text-amber-300 font-bold text-sm">
+                            <i class="fa-solid fa-user-tie text-amber-400 mr-1"></i>
+                            <span id="headerTeacherName">biskay, S.Pd.</span>
+                        </div>
+                    </div>
+                    <button onclick="openPinModal()" title="Panel Akses Guru" class="w-9 h-9 bg-indigo-800 hover:bg-amber-500 hover:text-indigo-950 text-indigo-200 rounded-lg flex items-center justify-center transition-all duration-200 border border-indigo-600/50 shadow">
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS & QUICK FILTERS -->
+    <div class="bg-white border-b border-slate-200 shadow-sm sticky top-[73px] sm:top-[77px] z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-3 py-2">
+                
+                <!-- Main Nav Tabs -->
+                <nav class="flex space-x-1 sm:space-x-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                    <button onclick="switchTab('tab-bank')" id="nav-tab-bank" class="tab-btn flex items-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all text-indigo-900 bg-indigo-50 border border-indigo-200">
+                        <i class="fa-solid fa-book-open text-indigo-600"></i>
+                        <span>Bank Soal & Logika</span>
+                    </button>
+                    <button onclick="switchTab('tab-quiz')" id="nav-tab-quiz" class="tab-btn flex items-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-stopwatch text-amber-600"></i>
+                        <span>Simulasi Kuis TKA</span>
+                    </button>
+                    <button onclick="switchTab('tab-detective')" id="nav-tab-detective" class="tab-btn flex items-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-magnifying-glass-chart text-emerald-600"></i>
+                        <span>Detektif LitNum</span>
+                    </button>
+                    <button onclick="switchTab('tab-records')" id="nav-tab-records" class="tab-btn flex items-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-award text-amber-500"></i>
+                        <span>Rekor & Sertifikat</span>
+                    </button>
+                </nav>
+
+                <!-- Global LitNum Domain Quick Filters -->
+                <div class="flex items-center gap-1.5 w-full md:w-auto justify-end bg-slate-100 p-1 rounded-xl border border-slate-200">
+                    <span class="text-xs font-semibold text-slate-500 px-2 hidden sm:inline">Domain:</span>
+                    <button onclick="setDomainFilter('ALL')" id="filter-domain-all" class="domain-btn text-xs font-medium px-3 py-1.5 rounded-lg transition-all bg-indigo-900 text-white shadow-sm">
+                        Semua LitNum
+                    </button>
+                    <button onclick="setDomainFilter('LITERASI')" id="filter-domain-literasi" class="domain-btn text-xs font-medium px-3 py-1.5 rounded-lg transition-all text-slate-600 hover:bg-slate-200">
+                        <i class="fa-solid fa-font mr-1 text-indigo-600"></i>Literasi Teks
+                    </button>
+                    <button onclick="setDomainFilter('NUMERASI')" id="filter-domain-numerasi" class="domain-btn text-xs font-medium px-3 py-1.5 rounded-lg transition-all text-slate-600 hover:bg-slate-200">
+                        <i class="fa-solid fa-calculator mr-1 text-amber-600"></i>Numerasi Data
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+
+        <!-- ==================== TAB 1: BANK SOAL & PEMBAHASAN LOGIKA ==================== -->
+        <section id="tab-bank" class="tab-content space-y-6">
+            
+            <!-- Controls & Level Selector -->
+            <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-indigo-950 flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-amber-500"></i>
+                        Eksplorasi Bank Soal & Pembahasan Logika
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+                        Pelajari wacana teks informasi, analisis data spasial, dan penalaran matematika tanpa hafalan rumus.
+                    </p>
+                </div>
+                
+                <!-- Difficulty Level Pills -->
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Tingkat:</span>
+                    <button onclick="setLevelFilter('ALL')" id="lvl-all" class="level-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-indigo-900 text-white shadow-sm">
+                        Semua Level
+                    </button>
+                    <button onclick="setLevelFilter(1)" id="lvl-1" class="level-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-100 text-emerald-800 hover:bg-emerald-200">
+                        Level 1 (Dasar)
+                    </button>
+                    <button onclick="setLevelFilter(2)" id="lvl-2" class="level-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-amber-100 text-amber-800 hover:bg-amber-200">
+                        Level 2 (Menengah)
+                    </button>
+                    <button onclick="setLevelFilter(3)" id="lvl-3" class="level-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-purple-100 text-purple-800 hover:bg-purple-200">
+                        Level 3 (HOTS)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Questions Grid/List -->
+            <div id="bankQuestionContainer" class="space-y-6">
+                <!-- Dynamic Content Rendered Here -->
+            </div>
+
+        </section>
+
+        <!-- ==================== TAB 2: SIMULASI KUIS TKA LITNUM ==================== -->
+        <section id="tab-quiz" class="tab-content hidden space-y-6">
+            
+            <!-- Quiz Welcome / Intro Card -->
+            <div id="quizStartCard" class="bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-950 rounded-2xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-black select-none pointer-events-none">
+                    <i class="fa-solid fa-stopwatch"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <span class="inline-flex items-center gap-1.5 bg-amber-400 text-indigo-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                        <i class="fa-solid fa-bolt"></i> Mode Ujian Interaktif
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Simulasi Kuis TKA LitNum SD</h2>
+                    <p class="text-indigo-200 text-sm sm:text-base leading-relaxed">
+                        Uji kemampuan literasi baca-tulis teks kontekstual dan numerasi logika data Anda dalam paket 10 soal acak berwaktu. Siapkan konsentrasi penuh!
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2 text-xs font-medium text-indigo-200">
+                        <div class="flex items-center gap-2 bg-indigo-950/60 px-3 py-2 rounded-lg border border-indigo-700/50">
+                            <i class="fa-solid fa-list-check text-amber-400"></i> 10 Soal Beragam Level
+                        </div>
+                        <div class="flex items-center gap-2 bg-indigo-950/60 px-3 py-2 rounded-lg border border-indigo-700/50">
+                            <i class="fa-solid fa-clock text-amber-400"></i> Waktu Total: 15 Menit
+                        </div>
+                        <div class="flex items-center gap-2 bg-indigo-950/60 px-3 py-2 rounded-lg border border-indigo-700/50">
+                            <i class="fa-solid fa-volume-high text-amber-400"></i> Audio Feedback Instan
+                        </div>
+                    </div>
+                    <div class="pt-4">
+                        <button onclick="startQuiz()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-indigo-950 font-extrabold text-lg px-8 py-3.5 rounded-xl shadow-lg hover:shadow-amber-500/30 transition-all duration-200 flex items-center gap-3 transform active:scale-95">
+                            <i class="fa-solid fa-play"></i> Mulai Simulasi Kuis
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Quiz Layout (Hidden by Default) -->
+            <div id="quizActiveCard" class="hidden space-y-6">
+                <!-- Quiz Progress Bar Header -->
+                <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-4 w-full sm:w-auto">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-900 font-bold flex items-center justify-center text-lg border border-indigo-200" id="quizCurrentNumDisplay">
+                            1
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Kemajuan Kuis</div>
+                            <div class="text-sm font-bold text-slate-800" id="quizProgressText">Soal 1 dari 10</div>
+                        </div>
+                    </div>
+
+                    <!-- Timer Badge -->
+                    <div class="flex items-center gap-2 bg-amber-50 text-amber-900 border border-amber-200 px-4 py-2 rounded-xl text-base font-extrabold shadow-inner">
+                        <i class="fa-solid fa-stopwatch text-amber-600 animate-pulse"></i>
+                        <span id="quizTimerDisplay">15:00</span>
+                    </div>
+                </div>
+
+                <!-- Main Quiz Card -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                    <div class="p-6 sm:p-8 space-y-6">
+                        <!-- Passage Context -->
+                        <div class="bg-slate-50 border-l-4 border-indigo-800 p-4 sm:p-5 rounded-r-xl space-y-2">
+                            <div class="flex items-center gap-2 text-xs font-bold text-indigo-900 uppercase tracking-wider">
+                                <i class="fa-solid fa-file-lines"></i> Wacana Kontekstual & Data
+                            </div>
+                            <div id="quizPassage" class="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
+                                <!-- Text dynamic -->
+                            </div>
+                        </div>
+
+                        <!-- Question Prompt -->
+                        <div class="space-y-2">
+                            <span id="quizBadgeDomain" class="text-xs font-bold px-2.5 py-1 rounded-md bg-indigo-100 text-indigo-800">
+                                Literasi Teks
+                            </span>
+                            <h3 id="quizQuestionText" class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                                <!-- Question Dynamic -->
+                            </h3>
+                        </div>
+
+                        <!-- Answer Choices -->
+                        <div id="quizOptionsContainer" class="grid grid-cols-1 gap-3">
+                            <!-- Options Dynamic -->
+                        </div>
+                    </div>
+
+                    <!-- Footer Controls -->
+                    <div class="bg-slate-50 border-t border-slate-200 p-4 sm:p-5 flex justify-between items-center">
+                        <button onclick="prevQuizQuestion()" id="btnQuizPrev" class="px-4 py-2 rounded-xl border border-slate-300 font-bold text-sm text-slate-600 hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Sebelum
+                        </button>
+                        <button onclick="nextQuizQuestion()" id="btnQuizNext" class="px-6 py-2.5 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white font-bold text-sm shadow transition-all">
+                            Berikut <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                        <button onclick="finishQuizConfirmation()" id="btnQuizFinish" class="hidden px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow transition-all">
+                            Selesai & Submit <i class="fa-solid fa-check ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Result Breakdown Card (Hidden by Default) -->
+            <div id="quizResultCard" class="hidden space-y-6">
+                <!-- Score Summary -->
+                <div class="bg-gradient-to-br from-indigo-950 via-indigo-900 to-indigo-800 rounded-2xl p-6 sm:p-8 text-white shadow-xl text-center space-y-4">
+                    <div class="w-20 h-20 bg-amber-400 text-indigo-950 rounded-full flex items-center justify-center text-4xl mx-auto shadow-lg border-4 border-amber-300">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold">Hasil Simulasi Kuis LitNum</h3>
+                        <p class="text-indigo-200 text-sm mt-1">Laporan pencapaian analisis literasi & numerasi Anda</p>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto pt-2">
+                        <div class="bg-indigo-900/80 border border-indigo-700/50 p-3 rounded-xl">
+                            <div class="text-xs text-indigo-300">Skor Akhir</div>
+                            <div id="resScore" class="text-2xl font-black text-amber-400">0</div>
+                        </div>
+                        <div class="bg-indigo-900/80 border border-indigo-700/50 p-3 rounded-xl">
+                            <div class="text-xs text-indigo-300">Benar / Total</div>
+                            <div id="resCorrect" class="text-2xl font-black text-emerald-400">0 / 10</div>
+                        </div>
+                        <div class="bg-indigo-900/80 border border-indigo-700/50 p-3 rounded-xl">
+                            <div class="text-xs text-indigo-300">Akurasi</div>
+                            <div id="resAccuracy" class="text-2xl font-black text-blue-300">0%</div>
+                        </div>
+                        <div class="bg-indigo-900/80 border border-indigo-700/50 p-3 rounded-xl">
+                            <div class="text-xs text-indigo-300">Waktu Terpakai</div>
+                            <div id="resTimeSpent" class="text-2xl font-black text-amber-300">00:00</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center gap-3 pt-4 flex-wrap">
+                        <button onclick="startQuiz()" class="bg-amber-400 hover:bg-amber-300 text-indigo-950 font-bold px-6 py-2.5 rounded-xl text-sm shadow transition-all">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Coba Kuis Lagi
+                        </button>
+                        <button onclick="switchTab('tab-records')" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm shadow transition-all">
+                            <i class="fa-solid fa-file-certificate mr-1"></i> Cetak Sertifikat Hasil
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Detailed Breakdown List -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h4 class="font-extrabold text-slate-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass text-indigo-700"></i> Evaluasi Jawaban & Logika Pembahasan
+                    </h4>
+                    <div id="quizBreakdownContainer" class="space-y-4">
+                        <!-- Dynamic Detailed List -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== TAB 3: GAME DETEKTIF LITNUM ==================== -->
+        <section id="tab-detective" class="tab-content hidden space-y-6">
+            
+            <!-- Game Header Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row justify-between items-center gap-6 border-b-4 border-amber-500">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500 text-indigo-950 flex items-center justify-center text-3xl shadow-lg font-black shrink-0">
+                        <i class="fa-solid fa-user-secret"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2.5 py-0.5 rounded-full font-bold">
+                                Petualangan Pemecahan Kasus
+                            </span>
+                        </div>
+                        <h2 class="text-2xl font-black text-white mt-1">Mode Detektif LitNum SD</h2>
+                        <p class="text-xs sm:text-sm text-slate-300">
+                            Pecahkan misteri teks informasi dan angka tersembunyi di SD Negeri 1 tegallega 2!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- XP & Rank Badge -->
+                <div class="bg-indigo-900/90 border border-indigo-700/60 p-4 rounded-xl flex items-center gap-4 w-full md:w-auto justify-between">
+                    <div>
+                        <div class="text-xs text-slate-300 font-semibold">Pangkat Detektif:</div>
+                        <div id="detectiveRankText" class="text-base font-extrabold text-amber-400">Detektif Pemula</div>
+                    </div>
+                    <div class="text-right border-l border-indigo-800 pl-4">
+                        <div class="text-xs text-slate-300 font-semibold">Total XP:</div>
+                        <div id="detectiveXpText" class="text-2xl font-black text-emerald-400">0 XP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Solver Area -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Left: Case List Selector -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-extrabold text-slate-900 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open text-amber-500"></i> Berkas Kasus Aktif
+                    </h3>
+                    <div id="detectiveCaseList" class="space-y-2.5">
+                        <!-- Dynamic Cases Buttons -->
+                    </div>
+                </div>
+
+                <!-- Right: Active Case Board -->
+                <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col justify-between">
+                    <div class="p-6 space-y-6">
+                        <!-- Case Title & Badge -->
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                            <div>
+                                <span id="caseBadge" class="text-xs font-bold px-2.5 py-1 rounded-md bg-amber-100 text-amber-900">
+                                    Kasus 1
+                                </span>
+                                <h3 id="caseTitle" class="text-xl font-extrabold text-indigo-950 mt-1">
+                                    Misteri Panen Terong di Kebun Sekolah
+                                </h3>
+                            </div>
+                            <span id="caseRewardXp" class="text-xs font-black text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+                                +150 XP
+                            </span>
+                        </div>
+
+                        <!-- Case Story Context -->
+                        <div class="bg-amber-50/60 border border-amber-200/60 rounded-xl p-5 space-y-3">
+                            <div class="flex items-center gap-2 text-xs font-bold text-amber-900 uppercase">
+                                <i class="fa-solid fa-quote-left"></i> Laporan TKP & Fakta Penyelidikan
+                            </div>
+                            <p id="caseDescription" class="text-slate-700 text-sm leading-relaxed">
+                                Siswa kelas 5 SD Negeri 1 tegallega 2 sedang mendata hasil kebun sekolah. 3 petak kebun menghasilkan total 120 kg terong. Petak A menghasilkan 35 kg, Petak B menghasilkan 45 kg. Kebun petak C akan dijual ke pasar dengan harga Rp 12.000 / kg.
+                            </p>
+                        </div>
+
+                        <!-- Detective Target Question -->
+                        <div class="space-y-2">
+                            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tugas Pemecahan Kasus:</div>
+                            <h4 id="caseQuestion" class="text-base font-extrabold text-slate-900">
+                                Berapakah total pendapatan sekolah dari penjualan terong petak C?
+                            </h4>
+                        </div>
+
+                        <!-- Options / Answer Input -->
+                        <div id="caseOptions" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <!-- Dynamic Options -->
+                        </div>
+
+                        <!-- Detective Logic Hint Card -->
+                        <div id="detectiveHintBox" class="hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 space-y-2 animate-fade-in">
+                            <div class="flex items-center gap-2 text-xs font-bold text-indigo-900">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i> Bantuan Logika Detektif:
+                            </div>
+                            <p id="detectiveHintText" class="text-xs sm:text-sm text-indigo-800 leading-relaxed">
+                                Step 1: Hitung sisa terong petak C = 120 - (35 + 45) = 40 kg.<br>Step 2: Kalikan sisa 40 kg x Rp 12.000 = Rp 480.000.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Detective Footer Actions -->
+                    <div class="bg-slate-50 border-t border-slate-200 p-4 sm:p-5 flex justify-between items-center">
+                        <button onclick="toggleDetectiveHint()" class="text-xs sm:text-sm font-bold text-indigo-900 hover:text-indigo-700 flex items-center gap-1.5 bg-indigo-100 hover:bg-indigo-200 px-3.5 py-2 rounded-xl transition-all">
+                            <i class="fa-solid fa-brain text-amber-500"></i> Bantuan Logika Detektif
+                        </button>
+                        <button onclick="submitCaseAnswer()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl shadow transition-all">
+                            Kirim Jawaban Kasus <i class="fa-solid fa-check-double ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ==================== TAB 4: REKOR & SERTIFIKAT DIGITAL ==================== -->
+        <section id="tab-records" class="tab-content hidden space-y-6">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Left: Profile & Badges -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-indigo-900 text-amber-400 font-extrabold flex items-center justify-center text-2xl border-2 border-amber-400 shadow">
+                                <i class="fa-solid fa-user-graduate"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-base" id="profileStudentNameDisplay">Siswa SD Tegallega 2</h3>
+                                <p class="text-xs text-slate-500" id="profileSchoolDisplay">SD Negeri 1 tegallega 2</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100 space-y-2 text-xs">
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-500">Status Capaian:</span>
+                                <span class="font-bold text-emerald-600" id="profileStatusBadge">Sangat Baik</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-500">Akurasi LitNum:</span>
+                                <span class="font-bold text-indigo-900" id="profileAccuracyDisplay">85%</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-500">Detektif XP:</span>
+                                <span class="font-bold text-amber-600" id="profileXpDisplay">450 XP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badges Grid -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                        <h4 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-medal text-amber-500"></i> Gelar Lencana LitNum SD
+                        </h4>
+                        <div class="grid grid-cols-2 gap-3 text-center">
+                            <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl space-y-1">
+                                <i class="fa-solid fa-book-bookmark text-2xl text-amber-600"></i>
+                                <div class="text-xs font-bold text-amber-950">Pakar Teks</div>
+                                <div class="text-[10px] text-amber-700">Literasi Level 3</div>
+                            </div>
+                            <div class="bg-indigo-50 border border-indigo-200 p-3 rounded-xl space-y-1">
+                                <i class="fa-solid fa-chart-pie text-2xl text-indigo-600"></i>
+                                <div class="text-xs font-bold text-indigo-950">Master Data</div>
+                                <div class="text-[10px] text-indigo-700">Numerasi Grafik</div>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl space-y-1">
+                                <i class="fa-solid fa-user-ninja text-2xl text-emerald-600"></i>
+                                <div class="text-xs font-bold text-emerald-950">Detektif LitNum</div>
+                                <div class="text-[10px] text-emerald-700">3 Kasus Selesai</div>
+                            </div>
+                            <div class="bg-purple-50 border border-purple-200 p-3 rounded-xl space-y-1">
+                                <i class="fa-solid fa-crown text-2xl text-purple-600"></i>
+                                <div class="text-xs font-bold text-purple-950">Bintang TKA</div>
+                                <div class="text-[10px] text-purple-700">Skor Kuis > 80</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Certificate Generator & WA Report Generator -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Print Certificate Generator Box -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-5">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                            <div>
+                                <h3 class="font-extrabold text-indigo-950 text-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-certificate text-amber-500"></i> Generator Sertifikat Digital LitNum
+                                </h3>
+                                <p class="text-xs text-slate-500 mt-0.5">
+                                    Cetak Sertifikat Kelulusan TKA LitNum Format A4 Landscape Siap Simpan PDF
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Siswa Penerima Sertifikat:</label>
+                                <input type="text" id="certStudentInput" value="MUHAMMAD RIZKY PRATAMA" placeholder="Masukkan Nama Lengkap Siswa..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-900 focus:outline-none text-sm font-semibold">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nilai Evaluasi LitNum:</label>
+                                    <input type="number" id="certScoreInput" value="92" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm font-semibold">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Predikat Capaian:</label>
+                                    <select id="certPredicateInput" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm font-semibold">
+                                        <option value="Sangat Memuaskan (Sangat Baik)">Sangat Memuaskan (Sangat Baik)</option>
+                                        <option value="Baik / Competent">Baik / Competent</option>
+                                        <option value="Cukup (Perlu Pembiasaan)">Cukup (Perlu Pembiasaan)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex flex-wrap gap-3">
+                                <button onclick="openCertificatePreview()" class="bg-gradient-to-r from-indigo-950 to-indigo-800 hover:from-indigo-900 hover:to-indigo-700 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-md flex items-center gap-2">
+                                    <i class="fa-solid fa-print text-amber-400"></i> Cetak / Simpan PDF Sertifikat
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Report Generator Box -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                        <h4 class="font-extrabold text-slate-900 text-base flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-600 text-xl"></i> Generator Pesan Ringkasan Ortu (WhatsApp)
+                        </h4>
+                        <p class="text-xs text-slate-500">
+                            Buat format pesan otomatis hasil pembelajaran literasi & numerasi siswa untuk dikirimkan langsung ke WhatsApp Orang Tua / Wali Murid.
+                        </p>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nomor WA Orang Tua (Opsional):</label>
+                                <input type="text" id="waPhoneInput" placeholder="Contoh: 6281234567890" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Pratinjau Teks Pesan WhatsApp:</label>
+                                <textarea id="waPreviewText" rows="5" readonly class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 leading-relaxed"></textarea>
+                            </div>
+                            <button onclick="sendWhatsAppMessage()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp"></i> Kirim Pesan ke Orang Tua
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-indigo-950 text-indigo-300 py-6 border-t border-indigo-900 text-xs text-center mt-12">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <div class="font-bold text-amber-400 text-sm">
+                SD Negeri 1 tegallega 2 &bull; Pengajar: biskay, S.Pd.
+            </div>
+            <p class="text-indigo-400">
+                Aplikasi Asesmen & Pembelajaran Literasi & Numerasi (LitNum) SD &copy; 2026. 100% Offline & Standalone.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALS & TOAST NOTIFICATIONS ==================== -->
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- TEACHER ACCESS PIN MODAL -->
+    <div id="pinModal" class="fixed inset-0 bg-indigo-950/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-5 border border-indigo-100">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-extrabold text-indigo-950 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-amber-500"></i> Akses Keamanan Guru
+                </h3>
+                <button onclick="closePinModal()" class="text-slate-400 hover:text-slate-600 text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <p class="text-xs text-slate-600">
+                Masukkan PIN Akses Guru untuk mengedit data sekolah, melihat reset data, dan statistik keseluruhan.
+            </p>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">PIN Akses (Default: 1234):</label>
+                    <input type="password" id="pinInput" maxlength="6" placeholder="Masukkan PIN..." class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-center text-lg font-mono font-bold tracking-widest focus:ring-2 focus:ring-indigo-900 outline-none">
+                </div>
+                <button onclick="verifyTeacherPin()" class="w-full bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-2.5 rounded-xl text-sm shadow">
+                    Masuk Panel Guru
+                </button>
+            </div>
+
+            <!-- Panel Content Hidden inside Pin Modal until verified -->
+            <div id="teacherPanelContent" class="hidden pt-4 border-t border-slate-200 space-y-4">
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs text-amber-900">
+                    <i class="fa-solid fa-shield-halved mr-1"></i> Terverifikasi sebagai Pengajar Utama.
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Ubah Nama Sekolah:</label>
+                    <input type="text" id="editSchoolName" value="SD Negeri 1 tegallega 2" class="w-full px-3 py-1.5 border text-xs rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Ubah Nama Guru / Pengajar:</label>
+                    <input type="text" id="editTeacherName" value="biskay, S.Pd." class="w-full px-3 py-1.5 border text-xs rounded-lg">
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="saveTeacherSettings()" class="bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-lg flex-1">
+                        Simpan Perubahan
+                    </button>
+                    <button onclick="resetAllData()" class="bg-red-100 text-red-700 border border-red-200 text-xs font-bold px-3 py-2 rounded-lg">
+                        Reset Data
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CERTIFICATE PRINT / PREVIEW MODAL -->
+    <div id="certificateModal" class="fixed inset-0 bg-slate-900/90 z-50 overflow-y-auto hidden p-4 sm:p-8 flex items-center justify-center">
+        <div class="max-w-4xl w-full space-y-4">
+            
+            <!-- Modal Action Header Bar (No Print) -->
+            <div class="no-print flex justify-between items-center text-white bg-indigo-950 p-4 rounded-xl border border-indigo-800 shadow-lg">
+                <span class="font-bold text-sm">
+                    <i class="fa-solid fa-certificate text-amber-400 mr-2"></i> Pratinjau Sertifikat TKA LitNum SD (A4 Landscape)
+                </span>
+                <div class="flex items-center gap-3">
+                    <button onclick="window.print()" class="bg-amber-400 hover:bg-amber-300 text-indigo-950 font-extrabold text-xs px-4 py-2 rounded-lg shadow flex items-center gap-1.5">
+                        <i class="fa-solid fa-print"></i> Cetak / Save PDF
+                    </button>
+                    <button onclick="closeCertificateModal()" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-3 py-2 rounded-lg">
+                        <i class="fa-solid fa-xmark"></i> Tutup
+                    </button>
+                </div>
+            </div>
+
+            <!-- Printable Certificate Body A4 Landscape Card -->
+            <div class="print-area bg-white text-slate-900 p-8 sm:p-12 rounded-2xl shadow-2xl border-8 border-double border-indigo-950 relative overflow-hidden space-y-6">
+                <!-- Watermark Background -->
+                <div class="absolute inset-0 opacity-5 flex items-center justify-center pointer-events-none">
+                    <i class="fa-solid fa-graduation-cap text-[28rem] text-indigo-950"></i>
+                </div>
+
+                <!-- Certificate Outer Frame & Header -->
+                <div class="text-center space-y-2 relative z-10 border-b-2 border-indigo-950/20 pb-6">
+                    <div class="text-amber-600 font-bold uppercase tracking-widest text-xs">
+                        <span id="certSchoolHeader">SD Negeri 1 TEGALLEGA 2</span>
+                    </div>
+                    <h1 class="cert-font text-3xl sm:text-5xl font-extrabold text-indigo-950 tracking-wide">
+                        SERTIFIKAT CAPAIAN TKA LITNUM
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-600 italic">
+                        Nomor Registrasi: KEMBALI-LITNUM/SD/2026/<span id="certRegNum">0847</span>
+                    </p>
+                </div>
+
+                <!-- Main Awardee Section -->
+                <div class="text-center space-y-4 relative z-10 py-4">
+                    <p class="text-xs sm:text-sm text-slate-600 uppercase tracking-wider font-semibold">
+                        Sertifikat Kelulusan Evaluasi Literasi & Numerasi Diberikan Kepada:
+                    </p>
+                    <div id="certStudentName" class="cert-font text-2xl sm:text-4xl font-bold text-indigo-950 border-b-2 border-amber-500 inline-block px-8 py-1">
+                        MUHAMMAD RIZKY PRATAMA
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-700 max-w-2xl mx-auto leading-relaxed pt-2">
+                        Telah mengikuti dan menyelesaikan seluruh Rangkaian Evaluasi & Simulasi Asesmen Literasi Teks Informasi serta Numerasi Spasial-Data dengan Hasil Pencapaian:
+                    </p>
+                    
+                    <div class="inline-flex items-center gap-6 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl">
+                        <div>
+                            <span class="text-[10px] text-slate-500 uppercase block font-bold">Skor TKA LitNum</span>
+                            <span id="certFinalScore" class="text-2xl font-black text-indigo-900">92 / 100</span>
+                        </div>
+                        <div class="h-8 w-px bg-slate-300"></div>
+                        <div>
+                            <span class="text-[10px] text-slate-500 uppercase block font-bold">Kategori Predikat</span>
+                            <span id="certPredicateDisplay" class="text-sm font-bold text-amber-700">Sangat Memuaskan (Sangat Baik)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Teacher Signature Block -->
+                <div class="flex justify-between items-end pt-8 relative z-10 text-xs">
+                    <div class="text-left space-y-1">
+                        <div class="w-20 h-20 bg-amber-100/50 rounded-full border border-amber-300 flex items-center justify-center text-amber-600 font-bold text-2xl">
+                            <i class="fa-solid fa-stamp"></i>
+                        </div>
+                        <div class="text-[10px] text-slate-400">Cap Legalitas Digital Sekolah</div>
+                    </div>
+
+                    <div class="text-center space-y-1">
+                        <div class="text-slate-600">Tegallega, <span id="certDate">11 November 2026</span></div>
+                        <div class="text-slate-600 font-medium">Pengajar Utama / Guru Kelas</div>
+                        
+                        <!-- Signature Placeholder Space -->
+                        <div class="h-16 flex items-center justify-center">
+                            <span class="cert-font text-indigo-900 text-lg font-bold italic opacity-80">biskay, S.Pd.</span>
+                        </div>
+
+                        <div id="certTeacherSignature" class="font-extrabold text-slate-900 border-t border-slate-800 pt-1 px-4">
+                            biskay, S.Pd.
+                        </div>
+                        <div class="text-[10px] text-slate-500">NIP. 19850412 201001 1 008</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================================================
+           1. DATA BANK SOAL LITNUM (LITERASI & NUMERASI LINTAS MATERI SD)
+           ========================================================================== */
+        const QUESTION_BANK = [
+            // LITERASI - LEVEL 1
+            {
+                id: 1,
+                domain: "LITERASI",
+                level: 1,
+                levelLabel: "Level 1 (Dasar)",
+                title: "Prosedur Pembuatan Kompos Sekolah",
+                passage: "Siswa SD Negeri 1 tegallega 2 mengumpulkan sampah daun kering di pekarangan sekolah. Daun dimasukkan ke dalam tong komposter, disiram sedikit air kelapa, lalu ditutup rapat selama 3 minggu. Proses ini mengubah sampah menjadi pupuk organik kaya nutrisi.",
+                question: "Apa tujuan utama mengumpulkan sampah daun kering berdasarkan wacana di atas?",
+                options: [
+                    "A. Menjual daun kering ke pasar lokal",
+                    "B. Diolah menjadi pupuk organik melalui proses pengomposan",
+                    "C. Dibakar agar pekarangan sekolah terlihat bersih",
+                    "D. Dijadikan hiasan dinding kelas"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Wacana menyebutkan daun dimasukkan ke tong komposter dan ditutup selama 3 minggu untuk diubah menjadi pupuk organik kaya nutrisi."
+            },
+            // NUMERASI - LEVEL 1
+            {
+                id: 2,
+                domain: "NUMERASI",
+                level: 1,
+                levelLabel: "Level 1 (Dasar)",
+                title: "Durasi Kegiatan Ekstrakurikuler",
+                passage: "Kegiatan Pramuka di SD Negeri 1 tegallega 2 dimulai pukul 14.15 WIB dan berakhir pada pukul 16.00 WIB. Sebelum latihan berakhir, ada istirahat selama 15 menit.",
+                question: "Berapa menit durasi efektif siswa berlatih Pramuka (tidak termasuk waktu istirahat)?",
+                options: [
+                    "A. 105 menit",
+                    "B. 90 menit",
+                    "C. 75 menit",
+                    "D. 60 menit"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Waktu total = 14.15 ke 16.00 = 1 jam 45 menit (105 menit). Durasi efektif = 105 menit - 15 menit istirahat = 90 menit."
+            },
+            // LITERASI - LEVEL 2
+            {
+                id: 3,
+                domain: "LITERASI",
+                level: 2,
+                levelLabel: "Level 2 (Menengah)",
+                title: "Pelestarian Burung Enggang & Ekosistem Hutan",
+                passage: "Burung Enggang merupakan pemencar biji pohon hutan yang sangat efisien. Setelah memakan buah-buahan hutan, bijinya dikeluarkan melalui kotoran saat terbang jauh. Tanpa burung Enggang, regenerasi pohon-pohon besar di hutan hujan akan terganggu parah.",
+                question: "Mengapa keberadaan burung Enggang sangat krusial bagi keberlangsungan hutan?",
+                options: [
+                    "A. Burung Enggang membuat sarang yang melindungi pohon dari angin",
+                    "B. Kotoran burung Enggang membantu menyebarkan biji pohon ke wilayah yang luas",
+                    "C. Burung Enggang memangsa hama ulat pengganggu tanaman kayu",
+                    "D. Burung Enggang menghasilkan suara yang menakuti penebang liar"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Teks menyebutkan Enggang adalah pemencar biji. Biji buah disebar melalui kotorannya saat terbang jauh, membantu regenerasi hutan."
+            },
+            // NUMERASI - LEVEL 2
+            {
+                id: 4,
+                domain: "NUMERASI",
+                level: 2,
+                levelLabel: "Level 2 (Menengah)",
+                title: "Pecahan Lahan Kebun Edukasi",
+                passage: "Lahan kebun sekolah seluas 600 m² dibagi menjadi beberapa area: 1/3 bagian ditanami jagung, 2/5 bagian ditanami sayur bayam, dan sisanya dibuat kolam ikan lele.",
+                question: "Berapakah luas lahan yang digunakan untuk kolam ikan lele?",
+                options: [
+                    "A. 160 m²",
+                    "B. 200 m²",
+                    "C. 240 m²",
+                    "D. 360 m²"
+                ],
+                correctAnswer: 0, // A
+                explanation: "Luas Jagung = 1/3 x 600 = 200 m². Luas Bayam = 2/5 x 600 = 240 m². Sisa Kolam Lele = 600 - (200 + 240) = 600 - 440 = 160 m²."
+            },
+            // LITERASI - LEVEL 3 (HOTS)
+            {
+                id: 5,
+                domain: "LITERASI",
+                level: 3,
+                levelLabel: "Level 3 (HOTS)",
+                title: "Analisis Pendapat: Hemat Listrik & Energi Solar",
+                passage: "Sekolah berencana memasang Panel Surya di atap gedung. Pengkritik menganggap biaya awal pemasangan sangat mahal. Namun, panitia menunjukkan data bahwa panel surya akan menghemat biaya listrik bulanan hingga 70% dan modal awal akan kembali dalam waktu 4 tahun.",
+                question: "Berdasarkan wacana di atas, evaluasi manakah yang paling logis untuk mendukung keputusan sekolah?",
+                options: [
+                    "A. Membatalkan pemasangan karena biaya awal terlalu mahal untuk sekolah",
+                    "B. Menyetujui pemasangan karena merupakan investasi jangka panjang yang hemat energi & biaya setelah 4 tahun",
+                    "C. Mengganti semua peralatan listrik dengan lampu minyak agar hemat",
+                    "D. Memasang panel surya hanya di ruang guru saja"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Secara evaluasi HOTS, penghematan 70% dan pengembalian modal dalam 4 tahun membuktikan bahwa biaya awal yang mahal merupakan investasi jangka panjang yang menguntungkan secara finansial dan lingkungan."
+            },
+            // NUMERASI - LEVEL 3 (HOTS)
+            {
+                id: 6,
+                domain: "NUMERASI",
+                level: 3,
+                levelLabel: "Level 3 (HOTS)",
+                title: "Transaksi Belanja Diskon & Keuangan Kantin",
+                passage: "Koperasi sekolah memberikan diskon 20% untuk setiap pembelian buku di atas Rp 50.000. Ani membeli 4 buku tulis seharga Rp 15.000 per buku dan 2 pensil seharga Rp 5.000 per pensil. Ani membayar dengan 2 lembar uang Rp 50.000.",
+                question: "Berapakah uang kembalian yang harus diterima Ani setelah memperhitungkan diskon buku?",
+                options: [
+                    "A. Rp 32.000",
+                    "B. Rp 42.000",
+                    "C. Rp 38.000",
+                    "D. Rp 48.000"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Harga Buku = 4 x 15.000 = Rp 60.000 (Dapat diskon 20%). Diskon Buku = 20% x 60.000 = Rp 12.000. Bayar Buku = 60.000 - 12.000 = Rp 48.000. Pensil = 2 x 5.000 = Rp 10.000. Total Belanja = 48.000 + 10.000 = Rp 58.000. Kembalian = Rp 100.000 - Rp 58.000 = Rp 42.000."
+            },
+            // LITERASI - LEVEL 2
+            {
+                id: 7,
+                domain: "LITERASI",
+                level: 2,
+                levelLabel: "Level 2 (Menengah)",
+                title: "Pentingnya Sarapan Sehat Sebelum Belajar",
+                passage: "Sarapan menyediakan glukosa yang dibutuhkan otak untuk berkonsentrasi. Siswa yang rutin sarapan dengan menu bergizi seimbang (karbohidrat kompleks dan protein) terbukti memiliki daya ingat dan nilai ketahanan belajar yang lebih stabil di kelas dibanding siswa yang melewatkan sarapan.",
+                question: "Ungkapan atau pesan utama yang paling sesuai dengan isi wacana adalah...",
+                options: [
+                    "A. Sarapan hanya penting untuk siswa yang akan berolahraga berat",
+                    "B. Glukosa dari makanan bergizi saat sarapan menunjang fungsi konsentrasi dan daya ingat otak",
+                    "C. Makan siang lebih penting daripada sarapan pagi",
+                    "D. Semua jenis makanan manis cocok dijadikan sarapan"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Gagasan utama wacana menekankan bahwa glukosa dari sarapan bergizi menyuplai energi penting bagi otak untuk konsentrasi dan daya ingat."
+            },
+            // NUMERASI - LEVEL 3 (HOTS)
+            {
+                id: 8,
+                domain: "NUMERASI",
+                level: 3,
+                levelLabel: "Level 3 (HOTS)",
+                title: "Statistika Rata-rata Nilai Literasi Kelas 5",
+                passage: "Rata-rata nilai kuis Literasi dari 9 siswa adalah 80. Ketika nilai Budi (siswa ke-10) dimasukkan, rata-rata nilai kuis kelas naik menjadi 82.",
+                question: "Berapakah nilai kuis Literasi yang diperoleh Budi?",
+                options: [
+                    "A. 90",
+                    "B. 95",
+                    "C. 100",
+                    "D. 82"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Total nilai 9 siswa = 9 x 80 = 720. Total nilai 10 siswa = 10 x 82 = 820. Nilai Budi = 820 - 720 = 100."
+            }
+        ];
+
+        /* ==========================================================================
+           2. DETECTIVE GAME CASES DATA
+           ========================================================================== */
+        const DETECTIVE_CASES = [
+            {
+                id: 1,
+                title: "Misteri Panen Terong Kebun Sekolah",
+                xp: 150,
+                description: "Siswa kelas 5 SD Negeri 1 tegallega 2 sedang mendata hasil kebun sekolah. 3 petak kebun menghasilkan total 120 kg terong. Petak A menghasilkan 35 kg, Petak B menghasilkan 45 kg. Kebun petak C akan dijual ke pasar dengan harga Rp 12.000 / kg.",
+                question: "Berapakah total pendapatan sekolah dari hasil penjualan terong petak C?",
+                options: [
+                    "A. Rp 420.000",
+                    "B. Rp 480.000",
+                    "C. Rp 540.000",
+                    "D. Rp 360.000"
+                ],
+                correctIndex: 1,
+                hint: "Langkah 1: Hitung sisa terong petak C = 120 - (35 + 45) = 40 kg. Langkah 2: Kalikan sisa 40 kg x Rp 12.000 = Rp 480.000."
+            },
+            {
+                id: 2,
+                title: "Kasus Buku Perpustakaan Hilang",
+                xp: 200,
+                description: "Di perpustakaan SD Tegallega 2, terdapat 400 buku. 45% berupa buku cerita rakyat, 3/10 bagian berupa sains dasar, dan sisanya buku majalah anak. Saat dihitung ulang, majalah anak yang ada hanya 85 eksemplar.",
+                question: "Berapa eksemplar majalah anak yang hilang dari perpustakaan?",
+                options: [
+                    "A. 15 eksemplar",
+                    "B. 25 eksemplar",
+                    "C. 35 eksemplar",
+                    "D. 10 eksemplar"
+                ],
+                correctIndex: 0,
+                hint: "Langkah 1: Buku Cerita = 45% x 400 = 180. Sains = 3/10 x 400 = 120. Total = 300. Seharusnya Majalah = 400 - 300 = 100. Karena fisik ada 85, maka hilang = 100 - 85 = 15 eksemplar."
+            },
+            {
+                id: 3,
+                title: "Peta Denah Keliling Taman Bunga",
+                xp: 250,
+                description: "Detektif menemukan peta denah taman bunga berbentuk persegi panjang. Panjang taman 24 meter dan lebarnya setengah dari panjangnya. Di sekeliling taman akan dipasang tiang lampu setiap jarak 4 meter.",
+                question: "Berapa banyak tiang lampu yang dibutuhkan di sekeliling taman?",
+                options: [
+                    "A. 16 tiang",
+                    "B. 18 tiang",
+                    "C. 20 tiang",
+                    "D. 12 tiang"
+                ],
+                correctIndex: 1,
+                hint: "Lebar = 24 / 2 = 12 m. Keliling = 2 x (24 + 12) = 2 x 36 = 72 m. Jumlah tiang = 72 m / 4 m = 18 tiang."
+            }
+        ];
+
+        /* ==========================================================================
+           3. APP STATE GLOBAL VARIABLES
+           ========================================================================== */
+        let state = {
+            teacherName: "biskay, S.Pd.",
+            schoolName: "SD Negeri 1 tegallega 2",
+            teacherPin: "1234",
+            currentDomainFilter: "ALL",
+            currentLevelFilter: "ALL",
+            quizActive: false,
+            quizQuestions: [],
+            quizCurrentIndex: 0,
+            quizUserAnswers: [],
+            quizTimerSeconds: 900,
+            quizTimerInterval: null,
+            quizTimeSpentSeconds: 0,
+            detectiveXp: 150,
+            detectiveCurrentCaseIndex: 0,
+            detectiveSolvedCases: [false, false, false],
+            studentName: "MUHAMMAD RIZKY PRATAMA",
+            lastQuizScore: 92
+        };
+
+        /* ==========================================================================
+           4. WEB AUDIO API SYNTHESIZER (PURE JS SOUND EFFECTS)
+           ========================================================================== */
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+        }
+
+        // Play Sweet Chime Sound for Correct Answer
+        function playSoundCorrect() {
+            try {
+                initAudio();
+                const now = audioCtx.currentTime;
+                
+                const osc1 = audioCtx.createOscillator();
+                const osc2 = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc1.type = 'sine';
+                osc2.type = 'triangle';
+
+                // Musical notes: C5 to G5 chord
+                osc1.frequency.setValueAtTime(523.25, now); // C5
+                osc1.frequency.exponentialRampToValueAtTime(783.99, now + 0.15); // G5
+
+                osc2.frequency.setValueAtTime(659.25, now); // E5
+                osc2.frequency.exponentialRampToValueAtTime(1046.50, now + 0.15); // C6
+
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc1.start(now);
+                osc2.start(now);
+                osc1.stop(now + 0.35);
+                osc2.stop(now + 0.35);
+            } catch (e) {
+                console.log("Audio not allowed yet");
+            }
+        }
+
+        // Play Low Buzz Sound for Wrong Answer
+        function playSoundWrong() {
+            try {
+                initAudio();
+                const now = audioCtx.currentTime;
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, now);
+                osc.frequency.linearRampToValueAtTime(100, now + 0.25);
+
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } catch (e) {
+                console.log("Audio not allowed yet");
+            }
+        }
+
+        /* ==========================================================================
+           5. UI CONTROLLERS & TOAST SYSTEM
+           ========================================================================== */
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let bgClass = "bg-indigo-900 text-white border-indigo-700";
+            let icon = "fa-info-circle text-amber-400";
+            if (type === 'success') {
+                bgClass = "bg-emerald-800 text-white border-emerald-600";
+                icon = "fa-circle-check text-emerald-300";
+            } else if (type === 'error') {
+                bgClass = "bg-red-900 text-white border-red-700";
+                icon = "fa-circle-xmark text-red-300";
+            }
+
+            toast.className = `flex items-center gap-3 px-4 py-3 rounded-xl shadow-xl border text-xs font-semibold transform transition-all duration-300 translate-y-2 opacity-0 pointer-events-auto ${bgClass}`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-base"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-50', 'text-indigo-900', 'border', 'border-indigo-200');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            });
+
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+                activeBtn.classList.add('bg-indigo-50', 'text-indigo-900', 'border', 'border-indigo-200');
+            }
+        }
+
+        function setDomainFilter(domain) {
+            state.currentDomainFilter = domain;
+            document.querySelectorAll('.domain-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-900', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-200');
+            });
+
+            const activeBtn = document.getElementById(`filter-domain-${domain.toLowerCase()}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-200');
+                activeBtn.classList.add('bg-indigo-900', 'text-white', 'shadow-sm');
+            }
+
+            renderQuestionBank();
+            showToast(`Filter Domain: ${domain === 'ALL' ? 'Semua LitNum' : domain}`, 'info');
+        }
+
+        function setLevelFilter(lvl) {
+            state.currentLevelFilter = lvl;
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-indigo-900');
+            });
+
+            const activeId = lvl === 'ALL' ? 'lvl-all' : `lvl-${lvl}`;
+            const activeBtn = document.getElementById(activeId);
+            if (activeBtn) activeBtn.classList.add('ring-2', 'ring-indigo-900');
+
+            renderQuestionBank();
+        }
+
+        /* ==========================================================================
+           6. TAB 1: BANK SOAL & PEMBAHASAN LOGIKA RENDERER
+           ========================================================================== */
+        function renderQuestionBank() {
+            const container = document.getElementById('bankQuestionContainer');
+            container.innerHTML = '';
+
+            const filtered = QUESTION_BANK.filter(q => {
+                const matchDomain = state.currentDomainFilter === 'ALL' || q.domain === state.currentDomainFilter;
+                const matchLevel = state.currentLevelFilter === 'ALL' || q.level === state.currentLevelFilter;
+                return matchDomain && matchLevel;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white p-8 rounded-2xl text-center text-slate-500 border border-slate-200">
+                        <i class="fa-solid fa-folder-open text-4xl mb-2 text-slate-300"></i>
+                        <p class="font-bold">Tidak ada soal yang sesuai dengan filter.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach((q, idx) => {
+                const domainBadgeClass = q.domain === 'LITERASI' 
+                    ? 'bg-indigo-100 text-indigo-900 border-indigo-200' 
+                    : 'bg-amber-100 text-amber-900 border-amber-200';
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4 hover:shadow-md transition-all';
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold px-3 py-1 rounded-full border ${domainBadgeClass}">
+                                ${q.domain === 'LITERASI' ? '<i class="fa-solid fa-font mr-1"></i>Literasi' : '<i class="fa-solid fa-calculator mr-1"></i>Numerasi'}
+                            </span>
+                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                                ${q.levelLabel}
+                            </span>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400">ID Soal: #${q.id}</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h3 class="font-extrabold text-indigo-950 text-base sm:text-lg">${q.title}</h3>
+                        <div class="bg-slate-50 border-l-4 border-indigo-800 p-4 rounded-r-xl text-xs sm:text-sm text-slate-700 leading-relaxed italic">
+                            "${q.passage}"
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="text-sm font-bold text-slate-900">${q.question}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium">
+                            ${q.options.map((opt, oIdx) => `
+                                <div class="p-2.5 rounded-lg border ${oIdx === q.correctAnswer ? 'bg-emerald-50 border-emerald-300 text-emerald-900 font-bold' : 'bg-slate-50 border-slate-200 text-slate-700'}">
+                                    ${opt} ${oIdx === q.correctAnswer ? '<i class="fa-solid fa-circle-check text-emerald-600 ml-1"></i> (Kunci)' : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-100 flex justify-between items-center">
+                        <button onclick="toggleBankExplanation(${q.id})" class="text-xs font-bold text-indigo-900 hover:text-indigo-700 flex items-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition-all">
+                            <i class="fa-solid fa-brain text-amber-500"></i>
+                            <span id="expBtnText-${q.id}">Lihat Pembahasan Logika</span>
+                        </button>
+                    </div>
+
+                    <div id="expCard-${q.id}" class="hidden bg-gradient-to-br from-indigo-950 to-indigo-900 text-white p-4 rounded-xl text-xs sm:text-sm leading-relaxed space-y-1 shadow-inner">
+                        <div class="font-bold text-amber-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-lightbulb"></i> Pembahasan Analisis Logika:
+                        </div>
+                        <p class="text-indigo-100">${q.explanation}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleBankExplanation(id) {
+            const expCard = document.getElementById(`expCard-${id}`);
+            const expBtnText = document.getElementById(`expBtnText-${id}`);
+            if (expCard.classList.contains('hidden')) {
+                expCard.classList.remove('hidden');
+                expBtnText.textContent = "Sembunyikan Pembahasan";
+            } else {
+                expCard.classList.add('hidden');
+                expBtnText.textContent = "Lihat Pembahasan Logika";
+            }
+        }
+
+        /* ==========================================================================
+           7. TAB 2: SIMULASI KUIS TKA LITNUM ENGINE
+           ========================================================================== */
+        function startQuiz() {
+            initAudio();
+            state.quizActive = true;
+            // Shuffle & pick up to 10 questions
+            state.quizQuestions = [...QUESTION_BANK].sort(() => 0.5 - Math.random()).slice(0, 10);
+            state.quizCurrentIndex = 0;
+            state.quizUserAnswers = new Array(state.quizQuestions.length).fill(null);
+            state.quizTimerSeconds = 900; // 15 mins
+            state.quizTimeSpentSeconds = 0;
+
+            document.getElementById('quizStartCard').classList.add('hidden');
+            document.getElementById('quizResultCard').classList.add('hidden');
+            document.getElementById('quizActiveCard').classList.remove('hidden');
+
+            startQuizTimer();
+            renderQuizQuestion();
+            showToast("Simulasi Kuis Dimulai! Selamat Bekerja.", "success");
+        }
+
+        function startQuizTimer() {
+            clearInterval(state.quizTimerInterval);
+            state.quizTimerInterval = setInterval(() => {
+                state.quizTimerSeconds--;
+                state.quizTimeSpentSeconds++;
+
+                const mins = Math.floor(state.quizTimerSeconds / 60);
+                const secs = state.quizTimerSeconds % 60;
+                document.getElementById('quizTimerDisplay').textContent = 
+                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+                if (state.quizTimerSeconds <= 0) {
+                    clearInterval(state.quizTimerInterval);
+                    finishQuiz();
+                    showToast("Waktu Ujian Telah Habis!", "error");
+                }
+            }, 1000);
+        }
+
+        function renderQuizQuestion() {
+            const q = state.quizQuestions[state.quizCurrentIndex];
+            const total = state.quizQuestions.length;
+
+            document.getElementById('quizCurrentNumDisplay').textContent = state.quizCurrentIndex + 1;
+            document.getElementById('quizProgressText').textContent = `Soal ${state.quizCurrentIndex + 1} dari ${total}`;
+            
+            document.getElementById('quizBadgeDomain').textContent = q.domain === 'LITERASI' ? 'Literasi Teks' : 'Numerasi Data';
+            document.getElementById('quizPassage').textContent = q.passage;
+            document.getElementById('quizQuestionText').textContent = q.question;
+
+            const optionsContainer = document.getElementById('quizOptionsContainer');
+            optionsContainer.innerHTML = '';
+
+            const selectedAnswer = state.quizUserAnswers[state.quizCurrentIndex];
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = selectedAnswer === idx;
+                const optBtn = document.createElement('button');
+                optBtn.className = `w-full text-left p-4 rounded-xl border text-sm font-semibold transition-all flex items-center justify-between ${
+                    isSelected 
+                        ? 'bg-indigo-900 text-white border-indigo-900 shadow-md' 
+                        : 'bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200'
+                }`;
+                optBtn.onclick = () => selectQuizOption(idx);
+                optBtn.innerHTML = `
+                    <span>${opt}</span>
+                    ${isSelected ? '<i class="fa-solid fa-circle-check text-amber-400 text-lg"></i>' : '<i class="fa-regular fa-circle text-slate-300"></i>'}
+                `;
+                optionsContainer.appendChild(optBtn);
+            });
+
+            // Nav buttons state
+            document.getElementById('btnQuizPrev').disabled = state.quizCurrentIndex === 0;
+            
+            if (state.quizCurrentIndex === total - 1) {
+                document.getElementById('btnQuizNext').classList.add('hidden');
+                document.getElementById('btnQuizFinish').classList.remove('hidden');
+            } else {
+                document.getElementById('btnQuizNext').classList.remove('hidden');
+                document.getElementById('btnQuizFinish').classList.add('hidden');
+            }
+        }
+
+        function selectQuizOption(optIdx) {
+            const currentQ = state.quizQuestions[state.quizCurrentIndex];
+            state.quizUserAnswers[state.quizCurrentIndex] = optIdx;
+
+            // Audio feedback
+            if (optIdx === currentQ.correctAnswer) {
+                playSoundCorrect();
+            } else {
+                playSoundWrong();
+            }
+
+            renderQuizQuestion();
+        }
+
+        function prevQuizQuestion() {
+            if (state.quizCurrentIndex > 0) {
+                state.quizCurrentIndex--;
+                renderQuizQuestion();
+            }
+        }
+
+        function nextQuizQuestion() {
+            if (state.quizCurrentIndex < state.quizQuestions.length - 1) {
+                state.quizCurrentIndex++;
+                renderQuizQuestion();
+            }
+        }
+
+        function finishQuizConfirmation() {
+            const unanswered = state.quizUserAnswers.filter(a => a === null).length;
+            if (unanswered > 0) {
+                if (!confirm(`Masih ada ${unanswered} soal belum dijawab. Yakin ingin mengumpulkan?`)) {
+                    return;
+                }
+            }
+            finishQuiz();
+        }
+
+        function finishQuiz() {
+            clearInterval(state.quizTimerInterval);
+            state.quizActive = false;
+
+            let correctCount = 0;
+            state.quizQuestions.forEach((q, i) => {
+                if (state.quizUserAnswers[i] === q.correctAnswer) {
+                    correctCount++;
+                }
+            });
+
+            const total = state.quizQuestions.length;
+            const score = Math.round((correctCount / total) * 100);
+            const accuracy = score;
+
+            state.lastQuizScore = score;
+
+            // Render Results
+            document.getElementById('resScore').textContent = score;
+            document.getElementById('resCorrect').textContent = `${correctCount} / ${total}`;
+            document.getElementById('resAccuracy').textContent = `${accuracy}%`;
+
+            const minsSpent = Math.floor(state.quizTimeSpentSeconds / 60);
+            const secsSpent = state.quizTimeSpentSeconds % 60;
+            document.getElementById('resTimeSpent').textContent = 
+                `${minsSpent.toString().padStart(2, '0')}:${secsSpent.toString().padStart(2, '0')}`;
+
+            // Render Breakdown List
+            const breakdownContainer = document.getElementById('quizBreakdownContainer');
+            breakdownContainer.innerHTML = '';
+
+            state.quizQuestions.forEach((q, i) => {
+                const userAns = state.quizUserAnswers[i];
+                const isCorrect = userAns === q.correctAnswer;
+
+                const item = document.createElement('div');
+                item.className = `p-4 rounded-xl border ${isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-red-50/50 border-red-200'} space-y-2`;
+                item.innerHTML = `
+                    <div class="flex items-center justify-between text-xs font-bold">
+                        <span class="${isCorrect ? 'text-emerald-800' : 'text-red-800'}">
+                            Soal #${i + 1} - ${isCorrect ? 'BENAR (+10)' : 'SALAH / TIDAK DIJAWAB'}
+                        </span>
+                        <span class="text-slate-500">${q.domain}</span>
+                    </div>
+                    <p class="text-xs font-bold text-slate-800">${q.question}</p>
+                    <div class="text-xs text-slate-600">
+                        <div>Jawaban Anda: <span class="font-bold">${userAns !== null ? q.options[userAns] : 'Tidak dijawab'}</span></div>
+                        <div>Kunci Jawaban: <span class="font-bold text-emerald-700">${q.options[q.correctAnswer]}</span></div>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg text-[11px] text-slate-600 border border-slate-200 mt-1">
+                        <strong>Pembahasan Logika:</strong> ${q.explanation}
+                    </div>
+                `;
+                breakdownContainer.appendChild(item);
+            });
+
+            document.getElementById('quizActiveCard').classList.add('hidden');
+            document.getElementById('quizResultCard').classList.remove('hidden');
+
+            updateProfileStats();
+            updateWaPreview();
+            showToast("Hasil Kuis Berhasil Dihitung!", "success");
+        }
+
+        /* ==========================================================================
+           8. TAB 3: GAME DETEKTIF LITNUM ENGINE
+           ========================================================================== */
+        function renderDetectiveCases() {
+            const container = document.getElementById('detectiveCaseList');
+            container.innerHTML = '';
+
+            DETECTIVE_CASES.forEach((c, i) => {
+                const isSolved = state.detectiveSolvedCases[i];
+                const isActive = state.detectiveCurrentCaseIndex === i;
+
+                const btn = document.createElement('button');
+                btn.onclick = () => selectDetectiveCase(i);
+                btn.className = `w-full text-left p-3.5 rounded-xl border text-xs font-bold transition-all flex items-center justify-between ${
+                    isActive 
+                        ? 'bg-indigo-900 text-white border-indigo-900 shadow' 
+                        : isSolved 
+                            ? 'bg-emerald-50 text-emerald-900 border-emerald-200' 
+                            : 'bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200'
+                }`;
+                btn.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid ${isSolved ? 'fa-circle-check text-emerald-400' : 'fa-folder'}"></i>
+                        <span>${c.title}</span>
+                    </div>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full ${isActive ? 'bg-amber-400 text-indigo-950 font-black' : 'bg-slate-200 text-slate-700'}">+${c.xp} XP</span>
+                `;
+                container.appendChild(btn);
+            });
+
+            renderActiveCaseBoard();
+        }
+
+        function selectDetectiveCase(idx) {
+            state.detectiveCurrentCaseIndex = idx;
+            document.getElementById('detectiveHintBox').classList.add('hidden');
+            renderDetectiveCases();
+        }
+
+        function renderActiveCaseBoard() {
+            const c = DETECTIVE_CASES[state.detectiveCurrentCaseIndex];
+            document.getElementById('caseBadge').textContent = `Kasus #${c.id}`;
+            document.getElementById('caseTitle').textContent = c.title;
+            document.getElementById('caseRewardXp').textContent = `+${c.xp} XP`;
+            document.getElementById('caseDescription').textContent = c.description;
+            document.getElementById('caseQuestion').textContent = c.question;
+            document.getElementById('detectiveHintText').innerHTML = c.hint;
+
+            const optionsContainer = document.getElementById('caseOptions');
+            optionsContainer.innerHTML = '';
+
+            c.options.forEach((opt, idx) => {
+                const optBtn = document.createElement('button');
+                optBtn.onclick = () => selectCaseOption(idx);
+                optBtn.id = `caseOptBtn-${idx}`;
+                optBtn.className = `p-3.5 rounded-xl border text-xs font-semibold text-left transition-all bg-slate-50 hover:bg-indigo-50 border-slate-200 text-slate-800`;
+                optBtn.textContent = opt;
+                optionsContainer.appendChild(optBtn);
+            });
+
+            // XP and Rank Display Update
+            document.getElementById('detectiveXpText').textContent = `${state.detectiveXp} XP`;
+            
+            let rank = "Detektif Pemula";
+            if (state.detectiveXp >= 500) rank = "Detektif Utama LitNum";
+            else if (state.detectiveXp >= 300) rank = "Detektif Handal";
+            document.getElementById('detectiveRankText').textContent = rank;
+        }
+
+        let selectedCaseOptionIdx = null;
+        function selectCaseOption(idx) {
+            selectedCaseOptionIdx = idx;
+            const c = DETECTIVE_CASES[state.detectiveCurrentCaseIndex];
+            c.options.forEach((_, i) => {
+                const btn = document.getElementById(`caseOptBtn-${i}`);
+                if (i === idx) {
+                    btn.className = "p-3.5 rounded-xl border text-xs font-bold text-left transition-all bg-indigo-900 text-white border-indigo-900 shadow";
+                } else {
+                    btn.className = "p-3.5 rounded-xl border text-xs font-semibold text-left transition-all bg-slate-50 border-slate-200 text-slate-800";
+                }
+            });
+        }
+
+        function toggleDetectiveHint() {
+            const hintBox = document.getElementById('detectiveHintBox');
+            hintBox.classList.toggle('hidden');
+        }
+
+        function submitCaseAnswer() {
+            if (selectedCaseOptionIdx === null) {
+                showToast("Pilih salah satu jawaban kasus terlebih dahulu!", "error");
+                return;
+            }
+
+            const c = DETECTIVE_CASES[state.detectiveCurrentCaseIndex];
+            if (selectedCaseOptionIdx === c.correctIndex) {
+                playSoundCorrect();
+                if (!state.detectiveSolvedCases[state.detectiveCurrentCaseIndex]) {
+                    state.detectiveSolvedCases[state.detectiveCurrentCaseIndex] = true;
+                    state.detectiveXp += c.xp;
+                }
+                showToast(`Kasus Berhasil Dipecahkan! +${c.xp} XP Diperoleh.`, "success");
+                renderDetectiveCases();
+                updateProfileStats();
+            } else {
+                playSoundWrong();
+                showToast("Analisis Jawaban Kasus Kurang Tepat. Gunakan Bantuan Logika Detektif!", "error");
+            }
+        }
+
+        /* ==========================================================================
+           9. TAB 4: REKOR & SERTIFIKAT CONTROLLERS
+           ========================================================================== */
+        function updateProfileStats() {
+            document.getElementById('profileStudentNameDisplay').textContent = state.studentName;
+            document.getElementById('profileSchoolDisplay').textContent = state.schoolName;
+            document.getElementById('profileAccuracyDisplay').textContent = `${state.lastQuizScore}%`;
+            document.getElementById('profileXpDisplay').textContent = `${state.detectiveXp} XP`;
+
+            let status = "Cukup";
+            if (state.lastQuizScore >= 85) status = "Sangat Baik (Master)";
+            else if (state.lastQuizScore >= 70) status = "Baik (Competent)";
+            document.getElementById('profileStatusBadge').textContent = status;
+
+            updateWaPreview();
+        }
+
+        function openCertificatePreview() {
+            const nameInput = document.getElementById('certStudentInput').value.trim();
+            if (nameInput) state.studentName = nameInput;
+
+            const scoreInput = document.getElementById('certScoreInput').value;
+            const predInput = document.getElementById('certPredicateInput').value;
+
+            document.getElementById('certSchoolHeader').textContent = state.schoolName.toUpperCase();
+            document.getElementById('certStudentName').textContent = state.studentName;
+            document.getElementById('certFinalScore').textContent = `${scoreInput} / 100`;
+            document.getElementById('certPredicateDisplay').textContent = predInput;
+            document.getElementById('certTeacherSignature').textContent = state.teacherName;
+
+            // Random 4-digit Reg Number
+            document.getElementById('certRegNum').textContent = Math.floor(1000 + Math.random() * 9000);
+
+            // Set Today's Date
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('certDate').textContent = today.toLocaleDateString('id-ID', options);
+
+            document.getElementById('certificateModal').classList.remove('hidden');
+        }
+
+        function closeCertificateModal() {
+            document.getElementById('certificateModal').classList.add('hidden');
+        }
+
+        function updateWaPreview() {
+            const student = state.studentName;
+            const school = state.schoolName;
+            const teacher = state.teacherName;
+            const score = state.lastQuizScore;
+            const xp = state.detectiveXp;
+
+            const text = `*LAPORAN HASIL PEMBELAJARAN LITNUM SD*\n` +
+                         `------------------------------------\n` +
+                         `Kepada Yth. Orang Tua / Wali Murid dari *${student}*\n\n` +
+                         `Berikut adalah ringkasan capaian Literasi & Numerasi di *${school}*:\n` +
+                         `• Skor Kuis TKA LitNum: *${score} / 100*\n` +
+                         `• Poin Pengalaman Detektif: *${xp} XP*\n` +
+                         `• Stat Capaian: *Sangat Aktif & Tuntas*\n\n` +
+                         `Terima kasih atas bimbingan dan dukungannya di rumah.\n\n` +
+                         `Salam hangat,\n` +
+                         `*${teacher}* (Pengajar Utama)`;
+
+            document.getElementById('waPreviewText').value = text;
+        }
+
+        function sendWhatsAppMessage() {
+            const phone = document.getElementById('waPhoneInput').value.trim();
+            const text = encodeURIComponent(document.getElementById('waPreviewText').value);
+            
+            let url = `https://api.whatsapp.com/send?text=${text}`;
+            if (phone) {
+                url = `https://api.whatsapp.com/send?phone=${phone}&text=${text}`;
+            }
+
+            window.open(url, '_blank');
+            showToast("Membuka WhatsApp...", "success");
+        }
+
+        /* ==========================================================================
+           10. TEACHER ACCESS PANEL & PIN MODAL LOGIC
+           ========================================================================== */
+        function openPinModal() {
+            document.getElementById('pinInput').value = '';
+            document.getElementById('teacherPanelContent').classList.add('hidden');
+            document.getElementById('pinModal').classList.remove('hidden');
+        }
+
+        function closePinModal() {
+            document.getElementById('pinModal').classList.add('hidden');
+        }
+
+        function verifyTeacherPin() {
+            const inputPin = document.getElementById('pinInput').value.trim();
+            if (inputPin === state.teacherPin) {
+                document.getElementById('teacherPanelContent').classList.remove('hidden');
+                showToast("Akses Guru Berhasil Dikonfirmasi!", "success");
+            } else {
+                showToast("PIN Keamanan Salah! Default: 1234", "error");
+            }
+        }
+
+        function saveTeacherSettings() {
+            const newSchool = document.getElementById('editSchoolName').value.trim();
+            const newTeacher = document.getElementById('editTeacherName').value.trim();
+
+            if (newSchool) state.schoolName = newSchool;
+            if (newTeacher) state.teacherName = newTeacher;
+
+            document.getElementById('headerSchoolName').textContent = state.schoolName;
+            document.getElementById('headerTeacherName').textContent = state.teacherName;
+
+            updateProfileStats();
+            closePinModal();
+            showToast("Pengaturan Sekolah & Guru Berhasil Diperbarui!", "success");
+        }
+
+        function resetAllData() {
+            state.detectiveXp = 0;
+            state.detectiveSolvedCases = [false, false, false];
+            state.lastQuizScore = 0;
+
+            updateProfileStats();
+            renderDetectiveCases();
+            closePinModal();
+            showToast("Seluruh Data Kemajuan Berhasil Direset!", "info");
+        }
+
+        /* ==========================================================================
+           11. INITIALIZATION ON WINDOW LOAD
+           ========================================================================== */
+        window.onload = function() {
+            renderQuestionBank();
+            renderDetectiveCases();
+            updateProfileStats();
+
+            // Direct Student Name Sync
+            document.getElementById('certStudentInput').addEventListener('input', (e) => {
+                state.studentName = e.target.value.trim() || "MUHAMMAD RIZKY PRATAMA";
+                updateProfileStats();
+            });
+        };
+    </script>
+</body>
+</html>
